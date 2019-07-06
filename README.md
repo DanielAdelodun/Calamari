@@ -3,9 +3,9 @@ These are the files for the command-line script that finds arbitrage opportunite
 -------
 
 `ticker_info.py` contains the variables `ticker_info`, `ticker_ab` and `ticker_m`.
-It also contains the method ticker_refresh()
+It also contains the method `ticker_refresh()`.
 
-- `ticker_info` is a dictionary of *ticker* : *ticker infomation*
+- `ticker_info` is a dictionary of *ticker*: *ticker infomation*
 - `ticker_ab` is a list of alternating the ask-bid prices
 - `ticker_m` is a list of alternating market prices and blank spaces.
 
@@ -17,12 +17,11 @@ These last two will become rows 44 and 45 in the spreadsheet; hence the formatti
 
 -------
 
-`SS_updater.py`, when run at the command-line, updates the spreadsheet the
-ask/bid and market prices.
+`SS_updater.py`, when run at the command-line, updates the spreadsheet the ask/bid and market prices.
 
 -------
 
-`credentials.json` is the reqirued data for using the Google Sheets API - it tells google who the developer is (as opposed the user) so that you/they can track the use of the api. The user still needs to log in and give the developer access to their google account data. 
+`credentials.json` is the reqirued data for using the Google Sheets API - it tells google who the developer is (as opposed the user) so that you/they can track the use of the API. The user still needs to log in and give the developer access to their google account data. 
 
 -------
 

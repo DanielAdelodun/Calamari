@@ -2,6 +2,11 @@ These are the files for the command-line script that finds arbitrage opportunite
 
 -------
 
+`trader.py` is the actual trading bot - it is what executes the trades that exploit the arbitrage opportunity found.
+It is currently basically the same as it was a few years ago - I will be update it soon! (Hopefully...)
+
+-------
+
 `ticker_info.py` contains a class, which can be used to build an 'Updater' object.
 This object is then be used to hold informfation about the different trading pairs. 
 You can call `refresher_ticker()` on an Updater object to update the ticker information it holds.

@@ -2,23 +2,13 @@ These are the files for the command-line script that finds arbitrage opportunite
 
 -------
 
-`ticker_info.py` contains the variables `ticker_info`, `ticker_ab` and `ticker_m`.
-It also contains the method ticker_refresh()
-
-- `ticker_info` is a dictionary of *ticker* : *ticker infomation*
-- `ticker_ab` is a list of alternating the ask-bid prices
-- `ticker_m` is a list of alternating market prices and blank spaces.
-
-These last two will become rows 44 and 45 in the spreadsheet; hence the formatting.
-
-- `ticker_refresh()` is used to update these lists.
-
-`ticker_refresh()` uses the krakenex module to get data directly from the Kraken website, and then puts that data in ticker_info, ticker_ab, and ticker_m
+`ticker_info.py` contains a class, which can be used to build an 'Updater' object.
+This object is then be used to hold informfation about the different trading pairs. 
+You can call `refresher_ticker()` on an Updater object to update the ticker information it holds.
 
 -------
 
-`SS_updater.py`, when run at the command-line, updates the spreadsheet the
-ask/bid and market prices.
+`SS_updater.py`, when run at the command-line, repeatedly updates the spreadsheet with recent ask/bid and market prices.
 
 -------
 

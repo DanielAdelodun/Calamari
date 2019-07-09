@@ -5,7 +5,7 @@ These are the files for the command-line script that finds arbitrage opportunite
 `ticker_info.py` contains the variables `ticker_info`, `ticker_ab` and `ticker_m`.
 It also contains the method `ticker_refresh()`.
 
-- `ticker_info` is a dictionary of *ticker*: *ticker infomation*
+- `ticker_info` is a dictionary of  *ticker*: *ticker-infomation*
 - `ticker_ab` is a list of alternating the ask-bid prices
 - `ticker_m` is a list of alternating market prices and blank spaces.
 
@@ -17,7 +17,7 @@ These last two will become rows 44 and 45 in the spreadsheet; hence the formatti
 
 -------
 
-`SS_updater.py`, when run at the command-line, updates the spreadsheet the ask/bid and market prices.
+`SS_updater.py`, when run at the command-line, updates the spreadsheet ask/bid and market prices.
 
 -------
 
@@ -25,4 +25,4 @@ These last two will become rows 44 and 45 in the spreadsheet; hence the formatti
 
 -------
 
-`token.pickle` is where the authetification token is saved; the auth token is used to build the spreadsheet api when the user is using the app and tells the api who the user is, who the developer is, and what permissions has the user given the developer.
+`token.pickle` is where the authentication token is saved; the auth token is used to build the spreadsheet api when the user is using the app and tells the api who the user is, who the developer is, and what permissions has the user given the developer.

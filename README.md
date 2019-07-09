@@ -3,12 +3,12 @@ These are the files for the command-line script that finds arbitrage opportunite
 -------
 
 `trader.py` is the actual trading bot - it is what executes the trades that exploit the arbitrage opportunity found.
-It is currently basically the same as it was a few years ago - I will be update it soon! (Hopefully...)
+It is currently basically the same as it was a few years ago - I will update it soon! (Hopefully...)
 
 -------
 
-`ticker_info.py` contains a class, which can be used to build an 'Updater' object.
-This object is then be used to hold informfation about the different trading pairs. 
+`ticker_info.py` contains a class which can be used to build an 'Updater' object.
+This object is then used to hold informfation about the different trading pairs. 
 You can call `refresher_ticker()` on an Updater object to update the ticker information it holds.
 
 -------
@@ -21,4 +21,4 @@ You can call `refresher_ticker()` on an Updater object to update the ticker info
 
 -------
 
-`token.pickle` is where the authetification token is saved; the auth token is used to build the spreadsheet api when the user is using the app and tells the api who the user is, who the developer is, and what permissions has the user given the developer.
+`token.pickle` is where the authentication token is saved; the auth token is used to build the spreadsheet api when the user is using the app and tells the api who the user is, who the developer is, and what permissions has the user given the developer.

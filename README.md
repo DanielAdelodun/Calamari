@@ -29,4 +29,8 @@ You can call `refresher_ticker()` on an Updater object to update the ticker info
 
 -------
 
-`assets.py` defines functions to get a list assets (currencies) and the trading pairs. 
+`assets.py` defines functions to get a list assets (currencies) and the trading pairs.
+
+-------
+
+`pair.py` defines a class `Pair`. An instance of `Pair` will contain information about a specific trading pair - it is used mostly in creating edges for the network.

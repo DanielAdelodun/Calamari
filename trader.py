@@ -1,62 +1,45 @@
-import krakenex
 import time
+import krakenex
+import networkx
+import ticker_info
+import fees.fee as fee
+from pair import *
+from assets import *
 
-fee = 0.9974
+kraken = krakenex.API()
+kraken.load_key('kraken.key')
 
-# Setting up market (Vertices) names.
-a = 'XETHXXBT'
-b = 'XXMRXXBT'
-c = 'XLTCXXBT'
-d = 'XXBTZEUR'
-e = 'XXBTZUSD'
-f = 'XXBTZCAD'
-g = 'XXBTZJPY'
-h = 'XXBTZGBP'
-i = 'XETHZGBP'
-j = 'XETHZJPY'
-k = 'XETHZCAD'
-l = 'XETHZEUR'
-m = 'XETHZUSD'
-n = 'XXMRZUSD'
-o = 'XXMRZEUR'
-p = 'XLTCZUSD'
-q = 'XLTCZEUR'
+# Setting up asset (vertex) names.
+all_assets = get_assets()
+special_assests = ['XXBT', 'XETH', 'XLTC', 'XXMR', 'ZUSD', 'ZCAD', 'ZEUR', 'ZGBP', 'ZJPY']
 
-# Creating API object
+# Edges should come pre-defined with pair. The 'special_edges' are whatever the names in 'special_pair_names' map to.
+special_pair_names = ticker_info.special_pairs
 
-u = krakenex.API()
-u.load_key('kraken.key')
-
-# Holder for ticker information
-
-tickerInfo = {a: '', b: '', c: '', d: '', e: '', f: '', g: '', h: '', i: '', j: '', k: '', l: '', m: '', n: '', o: '',
-              p: '', q: ''}
-
-
-# Defining function which gets/updates market information on a pair
-
-def loadticker(tickername):
-    x = u.query_public('Ticker', {'pair': tickername})
-    tickerInfo[tickername] = x['result'][tickername]
-    sentence = 'Ticker {} loaded'.format(tickername)
-    print(sentence)
-
+# This will be what we will use to update the information on each trading pair/ticker.
+# Check ticker_info.py for more details.
+Tickers = ticker_info.Updater()
 
 # Defining the function which buys/sells things
+def add_order(volume, pair_name, price, direction):
+    result = kraken.query_private('AddOrder',
+                                  {
+                                    'pair': pair, 
+                                    'type': direction, 
+                                    'ordertype': 'limit',
+                                    'price': price, 
+                                    'volume': volume
+                                  }
+                                 )
+    print('Transaction attempted: {direction} {volume} {pair} @ {price}.')
+    print(result)
 
-def maketransfer(volume, pair, price, bors):
-    w = u.query_private('AddOrder',
-                        {'pair': pair, 'type': bors, 'ordertype': 'limit', 'price': price, 'volume': volume})
-    v = str(w['error'])
-    if len(v) < 3:
-        r = str(w['result']['txid'][0])
-    else:
-        r = v
-    sentence = 'Transaction attempted: {} {} {} @ {}. \n{}'.format(bors, volume, pair, price, r)
-    print(sentence)
 
-
-# Defining the loops
+# Building the network
+network = networkx.Graph()
+all_edges = [all_pairs[pair].edge for pair in all_pairs]
+network.add_edges_from(all_edges)
+cycles = networkx.cycle_basis(network,' XXBT')
 
 loops = [[[a, -1], [i, 1], [h, -1]], [[a, -1], [j, 1], [g, -1]], [[a, -1], [k, 1], [f, -1]], [[a, -1], [m, 1], [e, -1]],
          [[a, -1], [l, 1], [d, -1]], [[c, -1], [q, 1], [d, -1]], [[c, -1], [p, 1], [e, -1]], [[b, -1], [o, 1], [d, -1]],
@@ -143,13 +126,13 @@ for t in range(0, 50):
             for j in range(0, 3):
                 ticker = tickerInfo[markets[j]]
                 if direction[j] > 0:
-                    maketransfer(x, markets[j], ticker['b'][0], 'sell')
+                    add_order(x, markets[j], ticker['b'][0], 'sell')
                     x *= fee * float(ticker['b'][0])
                     print('Passing forward ' + str(x) + ' on ' + str(markets[j]))
                     time.sleep(2)
                 else:
                     x *= fee * (1 / float(ticker['a'][0]))
-                    maketransfer(x, markets[j], float(ticker['a'][0]), 'buy')
+                    add_order(x, markets[j], float(ticker['a'][0]), 'buy')
                     print('Passing backward ' + str(x) + ' on ' + str(markets[j]))
                     time.sleep(2)
 
@@ -159,13 +142,13 @@ for t in range(0, 50):
             for j in range(2, -1, -1):
                 ticker = tickerInfo[markets[j]]
                 if direction[j] < 0:
-                    maketransfer(x, markets[j], ticker['b'][0], 'sell')
+                    add_order(x, markets[j], ticker['b'][0], 'sell')
                     x *= fee * float(ticker['b'][0])
                     print('Passing forward ' + str(x) + ' on ' + str(markets[j]))
                     time.sleep(2)
                 else:
                     x *= fee * (1 / float(ticker['a'][0]))
-                    maketransfer(x, markets[j], float(ticker['a'][0]), 'buy')
+                    add_order(x, markets[j], float(ticker['a'][0]), 'buy')
                     print('Passing backward ' + str(x) + ' on ' + str(markets[j]))
                     time.sleep(2)
 
@@ -175,13 +158,13 @@ for t in range(0, 50):
             for j in range(0, 3):
                 ticker = tickerInfo[markets[j]]
                 if direction[j] > 0:
-                    maketransfer(x, markets[j], ticker['c'][0], 'sell')
+                    add_order(x, markets[j], ticker['c'][0], 'sell')
                     x *= fee * float(ticker['c'][0])
                     print('Passing forward ' + str(x) + ' on ' + str(markets[j]))
                     time.sleep(2)
                 else:
                     x *= fee * (1 / float(ticker['c'][0]))
-                    maketransfer(x, markets[j], float(ticker['c'][0]), 'buy')
+                    add_order(x, markets[j], float(ticker['c'][0]), 'buy')
                     print('Passing backward ' + str(x) + ' on ' + str(markets[j]))
                     time.sleep(2)
 
@@ -191,13 +174,13 @@ for t in range(0, 50):
             for j in range(2, -1, -1):
                 ticker = tickerInfo[markets[j]]
                 if direction[j] < 0:
-                    maketransfer(x, markets[j], ticker['c'][0], 'sell')
+                    add_order(x, markets[j], ticker['c'][0], 'sell')
                     x *= fee * float(ticker['c'][0])
                     print('Passing forward ' + str(x) + ' on ' + str(markets[j]))
                     time.sleep(2)
                 else:
                     x *= fee * (1 / float(ticker['c'][0]))
-                    maketransfer(x, markets[j], float(ticker['c'][0]), 'buy')
+                    add_order(x, markets[j], float(ticker['c'][0]), 'buy')
                     print('Passing backward ' + str(x) + ' on ' + str(markets[j]))
                     time.sleep(2)
         else:

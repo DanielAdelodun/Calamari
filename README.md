@@ -22,3 +22,11 @@ You can call `refresher_ticker()` on an Updater object to update the ticker info
 -------
 
 `token.pickle` is where the authentication token is saved; the auth token is used to build the spreadsheet api when the user is using the app and tells the api who the user is, who the developer is, and what permissions has the user given the developer.
+
+-------
+
+`fees.py` contains a function used to update the fee.
+
+-------
+
+`assets.py` defines functions to get a list assets (currencies) and the trading pairs. 

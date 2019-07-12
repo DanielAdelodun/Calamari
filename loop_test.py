@@ -3,6 +3,7 @@ import ticker_info
 import networkx as nx
 from pair import *
 from fees import fee
+from order import *
 
 Tickers = ticker_info.Updater()
 
@@ -21,7 +22,7 @@ def find_pair(d_graph, d_edge):
     elif (dest, start) in d_graph.edges:
         return dest + start, 1
     else:
-        raise ValueError('Could not find a pair which trades these assests.')
+        raise ValueError('Could not find a pair which trades these assets.')
       
 class Loop():
     def __init__(self, d_graph, assets, Tickers):
@@ -32,14 +33,16 @@ class Loop():
         self.pair_names = [self.trades[i][0] for i in range(len(self.trades))]
         self.Tickers = Tickers
 
-    def simulate(self, reverse=0, refresh=True):
-        market = [100]
-        book = [100]
-
-        if refresh:
-            self.Tickers.refresh(pairs=self.pair_names)
+    def calculate(self, reverse=False, refresh=True, volume=100):
+        market = [volume]
+        book = [volume]
 
         trades = self.trades if not reverse else [(trade[0], (trade[1] + 1) % 2) for trade in self.trades] 
+        if reverse:
+            trades.reverse()
+        if refresh:
+            self.Tickers.refresh(pairs=self.pair_names)
+        print(trades)
 
         for trade in trades:
             pair = trade[0]
@@ -55,9 +58,33 @@ class Loop():
                 market.append(market[-1] * 1/marketp * fee)
 
         return (book, market)
-        
+
+    def execute(self, start_volume, reverse=False, refresh=False, market=False):
+        i = 0
+        volumes = self.calculate(reverse, refresh, start_volume)[1] if market else self.calculate(reverse, refresh, start_volume)[0]
+        trades = [(trade[0], (trade[1] + 1) % 2) for trade in self.trades] if reverse else self.trades
+        if reverse:
+            trades.reverse()
+        if refresh:
+            self.Tickers.refresh(pairs=self.pair_names)
+    
+        for trade in trades:
+            
+            pair = trade[0]
+            ask = float(self.Tickers.ticker_info[pair]['a'][0])
+            bid = float(self.Tickers.ticker_info[pair]['b'][0])
+            marketp = float(self.Tickers.ticker_info[pair]['c'][0])
+
+            volume = volumes[i+1] if trade[1] else volumes[i]
+            price = marketp if market else (ask if trade[1] else bid)
+
+            add_order(volume, trade[0], price, trade[1])
+            i += 1
+
 for cycle in cycles:
     loop = Loop(d_graph, cycle, Tickers) 
     print(loop.d_edges, loop.trades, sep='///')
-    print(loop.simulate())
-    print(loop.simulate(1))
+    print(loop.calculate())
+    print(loop.calculate(1))
+    loop.execute(1, 0)
+    loop.execute(1, 1)

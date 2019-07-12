@@ -25,7 +25,6 @@ Tickers = ticker_info.Updater()
 # Building the network(s)
 graph  = networkx.Graph()
 d_graph = networkx.DiGraph()
-all_edges = [all_pairs[pair].edge for pair in all_pairs]
 graph.add_edges_from(all_edges)
 d_graph.add_edges_from(all_edges)
 

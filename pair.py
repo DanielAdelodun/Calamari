@@ -15,3 +15,4 @@ all_pair_names = [pair_name for pair_name in all_pairs_info]
 all_pairs = {}
 for pair_name in all_pair_names:
     all_pairs[pair_name] = Pair(pair_name)
+all_edges = [all_pairs[pair].edge for pair in all_pairs]

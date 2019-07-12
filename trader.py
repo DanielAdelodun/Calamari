@@ -4,47 +4,33 @@ import networkx
 import ticker_info
 import fees.fee as fee
 from pair import *
+from loop import *
+from order import *
 from assets import *
 
 kraken = krakenex.API()
 kraken.load_key('kraken.key')
 
-# Setting up asset (vertex) names.
+# Setting up asset (node) names.
 all_assets = get_assets()
 special_assests = ['XXBT', 'XETH', 'XLTC', 'XXMR', 'ZUSD', 'ZCAD', 'ZEUR', 'ZGBP', 'ZJPY']
 
-# Edges should come pre-defined with pair. The 'special_edges' are whatever the names in 'special_pair_names' map to.
+# Pairs/edges should come pre-defined with pair. The 'special_pairs' are whatever the names in 'special_pair_names' map to.
 special_pair_names = ticker_info.special_pairs
 
 # This will be what we will use to update the information on each trading pair/ticker.
 # Check ticker_info.py for more details.
 Tickers = ticker_info.Updater()
 
-# Defining the function which buys/sells things
-def add_order(volume, pair_name, price, direction):
-    result = kraken.query_private('AddOrder',
-                                  {
-                                    'pair': pair, 
-                                    'type': direction, 
-                                    'ordertype': 'limit',
-                                    'price': price, 
-                                    'volume': volume
-                                  }
-                                 )
-    print('Transaction attempted: {direction} {volume} {pair} @ {price}.')
-    print(result)
-
-
-# Building the network
-network = networkx.Graph()
+# Building the network(s)
+graph  = networkx.Graph()
+d_graph = networkx.DiGraph()
 all_edges = [all_pairs[pair].edge for pair in all_pairs]
-network.add_edges_from(all_edges)
-cycles = networkx.cycle_basis(network,' XXBT')
+graph.add_edges_from(all_edges)
+d_graph.add_edges_from(all_edges)
 
-loops = [[[a, -1], [i, 1], [h, -1]], [[a, -1], [j, 1], [g, -1]], [[a, -1], [k, 1], [f, -1]], [[a, -1], [m, 1], [e, -1]],
-         [[a, -1], [l, 1], [d, -1]], [[c, -1], [q, 1], [d, -1]], [[c, -1], [p, 1], [e, -1]], [[b, -1], [o, 1], [d, -1]],
-         [[b, -1], [n, 1], [e, -1]]]
-
+cycles = networkx.cycle_basis(graph,' XXBT')
+loops = [Loop(d_graph, cycle), for cycle in cycles]
 
 # Creating loop objects
 

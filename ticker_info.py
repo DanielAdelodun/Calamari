@@ -18,9 +18,9 @@ class Updater():
         self.ticker_info = {}
         self.ask_bid = []
         self.market = []
-        self.refresh_tickers()
+        self.refresh()
 
-    def refresh_tickers(self, special=True, pairs=None):
+    def refresh(self, special=True, pairs=None):
         '''
         Updates the ticker_info dictionary with fresh data from the Kraken website.
         Also updates the special lists with the same data if special is set.
@@ -43,7 +43,10 @@ class Updater():
                 self.ask_bid.append(self.ticker_info[pair]['b'][0])
                 self.market.append(self.ticker_info[pair]['c'][0])
                 self.market.append(None)
-    
+
+    def pairs(self):
+        return list(self.ticker_info)
+
 if __name__ == "__main__":
     Tickers = Updater()
     print(Tickers.ticker_info)

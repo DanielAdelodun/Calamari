@@ -7,6 +7,7 @@ from pair import *
 from loop import *
 from order import *
 from assets import *
+import matplotlib.pyplot as plt
 
 kraken = krakenex.API()
 kraken.load_key('key.txt')
@@ -27,6 +28,9 @@ graph  = networkx.Graph()
 d_graph = networkx.DiGraph()
 graph.add_edges_from(all_edges)
 d_graph.add_edges_from(all_edges)
+
+# networkx.draw(graph, with_labels=True)
+# plt.show()
 
 # Finding the loops in that network
 cycles = networkx.cycle_basis(graph, 'XXBT')

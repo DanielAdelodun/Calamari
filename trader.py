@@ -2,14 +2,14 @@ import time
 import krakenex
 import networkx
 import ticker_info
-import fees.fee as fee
+from fees import *
 from pair import *
 from loop import *
 from order import *
 from assets import *
 
 kraken = krakenex.API()
-kraken.load_key('kraken.key')
+kraken.load_key('key.txt')
 
 # Setting up asset (node) names.
 all_assets = get_assets()
@@ -22,151 +22,34 @@ special_pair_names = ticker_info.special_pairs
 # Check ticker_info.py for more details.
 Tickers = ticker_info.Updater()
 
-# Building the network(s)
+# Building the network (2, actually - one directed, one undirected)
 graph  = networkx.Graph()
 d_graph = networkx.DiGraph()
 graph.add_edges_from(all_edges)
 d_graph.add_edges_from(all_edges)
 
-cycles = networkx.cycle_basis(graph,' XXBT')
-loops = [Loop(d_graph, cycle), for cycle in cycles]
+# Finding the loops in that network
+cycles = networkx.cycle_basis(graph, 'XXBT')
+loops = [Loop(d_graph, cycle, Tickers) for cycle in cycles]
 
-# Creating loop objects
+# Finally, we can find profitable loops and then trade them
+for loop in loops:
 
-class LoopOfThree:
-    def __init__(self, vectors):
-        self.markets = [vectors[0][0], vectors[1][0], vectors[2][0]]
-        self.direction = [vectors[0][1], vectors[1][1], vectors[2][1]]
-        for x in self.markets:
-            loadticker(x)
+    # Check forward direction.
+    volumes = loop.calculate()
+    if volumes[0][0] < volumes[0][-1]: # Checking if the volume of bitcoin at the end would be larger than at the start.
+        loop.execute(0.01)
+        continue
+    elif volumes[1][0] < volumes[1][-1]: # Ditto, but using market prices.
+        loop.execute(0.01, market=True)
+        continue
 
-    def updateinfo(self):
-        for x in self.markets:
-            loadticker(x)
+    # Check reverse.
+    volumes = loop.calculate(reverse=True)
+    if volumes[0][0] < volumes[0][-1]:
+        loop.execute(0.01, reverse=True)
+        continue
+    elif volumes[1][0] < volumes[1][-1]:
+        loop.execute(0.01, reverse=True, market=True)
+        continue
 
-    def forwardchange(self, x=100):
-        markets = self.markets
-        direction = self.direction
-        for y in range(0, 3):
-            direct = direction[y]
-            if direct < 0:
-                x *= (fee * 1 / (float(tickerInfo[markets[y]]['a'][0])))
-            else:
-                x *= (fee * float(tickerInfo[markets[y]]['b'][0]))
-        return x
-
-    def reversechange(self, x=100):
-        markets = self.markets
-        direction = self.direction
-        for y in range(0, 3):
-            direct = direction[2 - y]
-            if direct > 0:
-                x *= (fee * 1 / (float(tickerInfo[markets[2 - y]]['a'][0])))
-            else:
-                x *= (fee * float(tickerInfo[markets[2 - y]]['b'][0]))
-        return x
-
-    def m_forwardchange(self, x=100):
-        markets = self.markets
-        direction = self.direction
-        for y in range(0, 3):
-            direct = direction[y]
-            if direct < 0:
-                x *= (fee * 1 / (float(tickerInfo[markets[y]]['c'][0])))
-            else:
-                x *= (fee * float(tickerInfo[markets[y]]['c'][0]))
-        return x
-
-    def m_reversechange(self, x=100):
-        markets = self.markets
-        direction = self.direction
-        for y in range(0, 3):
-            direct = direction[2 - y]
-            if direct > 0:
-                x *= (fee * 1 / (float(tickerInfo[markets[2 - y]]['c'][0])))
-            else:
-                x *= (fee * float(tickerInfo[markets[2 - y]]['c'][0]))
-        return x
-
-
-for t in range(0, 50):
-    for y in range(0, 9):
-        print('\n')
-        new2 = LoopOfThree(loops[y])
-        forwardchange = new2.forwardchange() - 100
-        reversechange = new2.reversechange() - 100
-        m_forwardchange = new2.m_forwardchange() - 100
-        m_reversechange = new2.m_reversechange() - 100
-        direction = new2.direction
-        markets = new2.markets
-
-        print('Forward change is ' + str(forwardchange))
-        print('Reverse change is ' + str(reversechange))
-        print('Market forward change is ' + str(m_forwardchange))
-        print('Market reverse change is ' + str(m_reversechange))
-
-        if forwardchange > 0:
-            print('Forward change is positive. Lighting up forward:')
-            x = 0.002
-            for j in range(0, 3):
-                ticker = tickerInfo[markets[j]]
-                if direction[j] > 0:
-                    add_order(x, markets[j], ticker['b'][0], 'sell')
-                    x *= fee * float(ticker['b'][0])
-                    print('Passing forward ' + str(x) + ' on ' + str(markets[j]))
-                    time.sleep(2)
-                else:
-                    x *= fee * (1 / float(ticker['a'][0]))
-                    add_order(x, markets[j], float(ticker['a'][0]), 'buy')
-                    print('Passing backward ' + str(x) + ' on ' + str(markets[j]))
-                    time.sleep(2)
-
-        elif reversechange > 0:
-            print('Market forward change is positive. Lighting up forward:')
-            x = 0.002
-            for j in range(2, -1, -1):
-                ticker = tickerInfo[markets[j]]
-                if direction[j] < 0:
-                    add_order(x, markets[j], ticker['b'][0], 'sell')
-                    x *= fee * float(ticker['b'][0])
-                    print('Passing forward ' + str(x) + ' on ' + str(markets[j]))
-                    time.sleep(2)
-                else:
-                    x *= fee * (1 / float(ticker['a'][0]))
-                    add_order(x, markets[j], float(ticker['a'][0]), 'buy')
-                    print('Passing backward ' + str(x) + ' on ' + str(markets[j]))
-                    time.sleep(2)
-
-        elif m_forwardchange > 0:
-            print('Market forward change is positive. Lighting up forward:')
-            x = 0.002
-            for j in range(0, 3):
-                ticker = tickerInfo[markets[j]]
-                if direction[j] > 0:
-                    add_order(x, markets[j], ticker['c'][0], 'sell')
-                    x *= fee * float(ticker['c'][0])
-                    print('Passing forward ' + str(x) + ' on ' + str(markets[j]))
-                    time.sleep(2)
-                else:
-                    x *= fee * (1 / float(ticker['c'][0]))
-                    add_order(x, markets[j], float(ticker['c'][0]), 'buy')
-                    print('Passing backward ' + str(x) + ' on ' + str(markets[j]))
-                    time.sleep(2)
-
-        elif m_reversechange > 0:
-            print('Market reverse change is positive. Lighting up reverse:')
-            x = 0.002
-            for j in range(2, -1, -1):
-                ticker = tickerInfo[markets[j]]
-                if direction[j] < 0:
-                    add_order(x, markets[j], ticker['c'][0], 'sell')
-                    x *= fee * float(ticker['c'][0])
-                    print('Passing forward ' + str(x) + ' on ' + str(markets[j]))
-                    time.sleep(2)
-                else:
-                    x *= fee * (1 / float(ticker['c'][0]))
-                    add_order(x, markets[j], float(ticker['c'][0]), 'buy')
-                    print('Passing backward ' + str(x) + ' on ' + str(markets[j]))
-                    time.sleep(2)
-        else:
-            time.sleep(2)

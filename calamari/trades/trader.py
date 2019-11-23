@@ -1,6 +1,7 @@
 import time
 import krakenex
 import networkx
+import pygraphviz
 import ticker_info
 from fees import *
 from pair import *
@@ -29,8 +30,11 @@ d_graph = networkx.DiGraph()
 graph.add_edges_from(all_edges)
 d_graph.add_edges_from(all_edges)
 
-# networkx.draw(graph, with_labels=True)
-# plt.show()
+path, drawing = networkx.nx_agraph.view_pygraphviz(graph, prog='neato', path='graph.png')
+# drawing = networkx.nx_agraph.to_agraph(graph)
+drawing.graph_attr.update(dpi='166', mindist=3, overlap='False', splines='ortho')
+drawing.draw('drawing.png', 'png', 'neato')
+drawing.draw('drawdot.png', 'png', 'dot')
 
 # Finding the loops in that network
 cycles = networkx.cycle_basis(graph, 'XXBT')

@@ -6,11 +6,11 @@ def get_fee():
     try:
         fee = float(input('What is the transaction fee? (as a percentage): '))
     except:
-        print("Input invalid. Please try again, or simply press 'enter' to use the default amount.")
+        print("Input invalid. Please try again, or type '111' to use the default amount.")
         get_fee()
         return
    
-    if fee == '':
+    if fee == 111:
         fee = 0.9974
     else:
         fee = 1 - fee / 100

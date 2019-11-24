@@ -2,33 +2,38 @@ import time
 import krakenex
 import networkx
 import pygraphviz
-import ticker_info
-from fees import *
-from pair import *
-from loop import *
-from order import *
-from assets import *
 import matplotlib.pyplot as plt
+
+from ..data import info
+from ..data.fees import *
+from ..data.assets import *
+from ..network.pair import *
+from ..network.loop import *
+from ..trades.order import *
 
 kraken = krakenex.API()
 kraken.load_key('key.txt')
 
-# Setting up asset (node) names.
-all_assets = get_assets()
-special_assests = ['XXBT', 'XETH', 'XLTC', 'XXMR', 'ZUSD', 'ZCAD', 'ZEUR', 'ZGBP', 'ZJPY']
+# Setting up Asset (node) names.
+#all_assets = get_assets()
+#special_assests = ['XXBT', 'XETH', 'XLTC', 'XXMR',
+#                   'ZUSD', 'ZCAD', 'ZEUR', 'ZGBP',
+#                   'ZJPY']
 
-# Pairs/edges should come pre-defined with pair. The 'special_pairs' are whatever the names in 'special_pair_names' map to.
-special_pair_names = ticker_info.special_pairs
+# Pairs (edges) come pre-defined with the pair module.
+# 'special_pairs' are/will be whatever the names in 'special_pair_names' map to.
+special_pair_names = info.special_pair_names
 
-# This will be what we will use to update the information on each trading pair/ticker.
-# Check ticker_info.py for more details.
-Tickers = ticker_info.Updater()
+# What we will use to update the information on each trading pair/ticker.
+# Check info.py for more details.
+Tickers = info.Updater()
 
 # Building the network (2, actually - one directed, one undirected)
+# We can change the traders focus by changing what is in the network.
 graph  = networkx.Graph()
 d_graph = networkx.DiGraph()
-graph.add_edges_from(all_edges)
-d_graph.add_edges_from(all_edges)
+graph.add_edges_from(all_edges) # Here, we can change focus.
+d_graph.add_edges_from(all_edges) 
 
 path, drawing = networkx.nx_agraph.view_pygraphviz(graph, prog='neato', path='graph.png')
 # drawing = networkx.nx_agraph.to_agraph(graph)
@@ -36,11 +41,11 @@ drawing.graph_attr.update(dpi='166', mindist=3, overlap='False', splines='ortho'
 drawing.draw('drawing.png', 'png', 'neato')
 drawing.draw('drawdot.png', 'png', 'dot')
 
-# Finding the loops in that network
+# Finding the Loops in that network
 cycles = networkx.cycle_basis(graph, 'XXBT')
 loops = [Loop(d_graph, cycle, Tickers) for cycle in cycles]
 
-# Finally, we can find profitable loops and then trade them
+# Finally, we can find profitable Loops and exploit them.
 for loop in loops:
 
     # Check forward direction.

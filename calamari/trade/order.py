@@ -1,7 +1,11 @@
 import krakenex 
 
 kraken = krakenex.API()
-kraken.load_key('key.txt')
+try: 
+    kraken.load_key('/home/daniel/Public/Calamari/key.txt')
+except:
+    pass
+
 
 # Defining the function which buys/sells things
 def add_order(volume, pair_name, price, direction):

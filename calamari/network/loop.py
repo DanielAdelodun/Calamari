@@ -1,7 +1,7 @@
 from .pair import *
 from ..trade.order import *
 from ..data.assets import *
-from ..data.fees import fee
+from ..data.fees import *
 from ..data.info import *
 import networkx as nx
 
@@ -51,11 +51,11 @@ class Loop():
             marketp = float(self.Tickers.info[pair]['c'][0])
 
             if trade[1] == 0:
-                book.append(book[-1] * bid * fee)
-                market.append(market[-1] * marketp * fee)
+                book.append(book[-1] * bid * self.fee)
+                market.append(market[-1] * marketp * self.fee)
             else:
-                book.append(book[-1] * 1/ask * fee)
-                market.append(market[-1] * 1/marketp * fee)
+                book.append(book[-1] * 1/ask * self.fee)
+                market.append(market[-1] * 1/marketp * self.fee)
         if not silent:
             print('Volume changes after each transaction using...')
             print(' * Book Prices: ', book)
@@ -93,21 +93,21 @@ class Loop():
             add_order(volume, pair, price, trade[1])
             i += 1
 
-#if __name__ == '__main__':
-Tickers = Updater()
+if __name__ == '__main__':
+    Tickers = Updater()
 
-graph = nx.Graph()
-d_graph = nx.DiGraph()
+    graph = nx.Graph()
+    d_graph = nx.DiGraph()
 
-graph.add_edges_from(all_edges)
-d_graph.add_edges_from(all_edges)
+    graph.add_edges_from(all_edges)
+    d_graph.add_edges_from(all_edges)
 
-cycles = nx.cycle_basis(graph, 'XXBT')
-loops = []
+    cycles = nx.cycle_basis(graph, 'XXBT')
+    loops = []
 
-for cycle in cycles[0:5]:
-    loop = Loop(d_graph, cycle, Tickers) 
-    loops.append(loop)
-    loop.execute(1, 0, refresh=True, silent=False)
-    loop.execute(1, 1, refresh=True, silent=False)
-    print([loop.nodes for loop in loops])
+    for cycle in cycles[0:5]:
+        loop = Loop(d_graph, cycle, Tickers) 
+        loops.append(loop)
+        loop.execute(1, 0, refresh=True, silent=False)
+        loop.execute(1, 1, refresh=True, silent=False)
+        print([loop.nodes for loop in loops])

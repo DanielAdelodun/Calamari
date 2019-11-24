@@ -32,7 +32,7 @@ class Updater():
     def refresh(self, special=True, pairs=None):
         """
         Updates the info dictionary with fresh data from the Kraken website.
-        Also updates the special lists with the same data if :param:`special` is set.
+        Also updates the special lists with the same data if special is set.
 
         Args:
             pairs (list): List of Pair names to be refreshed.

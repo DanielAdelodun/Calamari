@@ -5,7 +5,7 @@ import krakenex
 
 kraken = krakenex.API()
 try: 
-    kraken.load_key('/home/daniel/Public/Calamari/key.txt')
+    kraken.load_key('key.txt')
 except:
     pass
 

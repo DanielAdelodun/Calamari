@@ -1,5 +1,6 @@
 name: calamari
 channels:
+  - conda-forge
   - defaults
 dependencies:
   - _libgcc_mutex=0.1=main
@@ -11,6 +12,7 @@ dependencies:
   - fontconfig=2.13.0=h9420a91_0
   - freetype=2.9.1=h8a8886c_1
   - fribidi=1.0.5=h7b6447c_0
+  - gettext=0.19.8.1=hd7bead4_3
   - glib=2.63.1=h5a9c865_0
   - graphite2=1.3.13=h23475e2_0
   - graphviz=2.40.1=h21bd128_2
@@ -40,6 +42,17 @@ dependencies:
   - sqlite=3.29.0=h7b6447c_0
   - tk=8.6.8=hbc83047_0
   - wheel=0.33.4=py37_0
+  - xorg-kbproto=1.0.7=h14c3975_1002
+  - xorg-libice=1.0.10=h516909a_0
+  - xorg-libsm=1.2.2=h470a237_5
+  - xorg-libx11=1.6.9=h516909a_0
+  - xorg-libxext=1.3.4=h516909a_0
+  - xorg-libxpm=3.5.12=h516909a_1002
+  - xorg-libxrender=0.9.10=h516909a_1002
+  - xorg-libxt=1.1.5=h516909a_1003
+  - xorg-renderproto=0.11.1=h14c3975_1002
+  - xorg-xextproto=7.3.0=h14c3975_1002
+  - xorg-xproto=7.0.31=h14c3975_1007
   - xz=5.2.4=h14c3975_4
   - zlib=1.2.11=h7b6447c_3
   - zstd=1.3.7=h0b5b093_0
@@ -62,5 +75,5 @@ dependencies:
     - six==1.13.0
     - uritemplate==3.0.0
     - urllib3==1.25.7
-prefix: /home/daniel/anaconda3/envs/calamari
+prefix: /home/ubuntu/miniconda3/envs/calamari
 

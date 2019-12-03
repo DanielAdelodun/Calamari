@@ -15,5 +15,3 @@ Module contents
 
 .. automodule:: calamari
    :members:
-   :undoc-members:
-   :show-inheritance:

@@ -1,4 +1,4 @@
-Calamari
+calamari
 ========
 
 .. toctree::

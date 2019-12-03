@@ -36,7 +36,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="calamari.network package" href="calamari.network.html" />
-    <link rel="prev" title="Welcome to calamari’s documentation!" href="../index.html" /> 
+    <link rel="prev" title="calamari package" href="calamari.html" /> 
 </head>
 
 <body class="wy-body-for-nav">
@@ -82,17 +82,33 @@
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">data</a><ul>
+<li class="toctree-l1 current"><a class="reference internal" href="calamari.html">calamari package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="calamari.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">calamari.data package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-calamari.data.SS_updater">calamari.data.SS_updater module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-calamari.data.assets">calamari.data.assets module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-calamari.data.fees">calamari.data.fees module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-calamari.data.info">calamari.data.info module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="calamari.network.html">calamari.network package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="calamari.trade.html">calamari.trade package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="calamari.html#module-contents">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="calamari.network.html">calamari.network package</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">calamari.data package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-calamari.data.SS_updater">calamari.data.SS_updater module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-calamari.data.assets">calamari.data.assets module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-calamari.data.fees">calamari.data.fees module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-calamari.data.info">calamari.data.info module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-calamari.data">Module contents</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="calamari.network.html">network</a></li>
-<li class="toctree-l1"><a class="reference internal" href="calamari.trade.html">trade</a></li>
+<li class="toctree-l1"><a class="reference internal" href="calamari.trade.html">calamari.trade package</a></li>
 </ul>
 
             
@@ -138,6 +154,8 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
+          <li><a href="calamari.html">calamari package</a> &raquo;</li>
+        
       <li>calamari.data package</li>
     
     
@@ -167,8 +185,7 @@
 <dl class="class">
 <dt id="calamari.data.SS_updater.SS_Updater">
 <em class="property">class </em><code class="sig-prename descclassname">calamari.data.SS_updater.</code><code class="sig-name descname">SS_Updater</code><span class="sig-paren">(</span><em class="sig-param">special_pair_names=['XETHXXBT', 'XXMRXXBT', 'XLTCXXBT', 'XXBTZEUR', 'XXBTZUSD', 'XXBTZCAD', 'XXBTZJPY', 'XXBTZGBP', 'XETHZGBP', 'XETHZJPY', 'XETHZCAD', 'XETHZEUR', 'XETHZUSD', 'XXMRZUSD', 'XXMRZEUR', 'XLTCZUSD', 'XLTCZEUR'], SSID='1rrwAsg9Ky1oCUlSwL2kambtrE3fJzTEsS56hbqOGJuU'</em><span class="sig-paren">)</span><a class="headerlink" href="#calamari.data.SS_updater.SS_Updater" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Updates a particular Google Sheet.</p>
+<dd><p>Updates a particular Google Sheet.</p>
 <dl class="attribute">
 <dt id="calamari.data.SS_updater.SS_Updater.special_pair_names">
 <code class="sig-name descname">special_pair_names</code><a class="headerlink" href="#calamari.data.SS_updater.SS_Updater.special_pair_names" title="Permalink to this definition">¶</a></dt>
@@ -192,8 +209,8 @@
 </dd></dl>
 
 <dl class="attribute">
-<dt id="calamari.data.SS_updater.SS_Updater.Ticker">
-<code class="sig-name descname">Ticker</code><a class="headerlink" href="#calamari.data.SS_updater.SS_Updater.Ticker" title="Permalink to this definition">¶</a></dt>
+<dt id="calamari.data.SS_updater.SS_Updater.Tickers">
+<code class="sig-name descname">Tickers</code><a class="headerlink" href="#calamari.data.SS_updater.SS_Updater.Tickers" title="Permalink to this definition">¶</a></dt>
 <dd><p>Default <code class="xref py py-class docutils literal notranslate"><span class="pre">Updater</span></code> used for getting Pair data.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type</dt>
@@ -204,14 +221,14 @@
 
 <dl class="method">
 <dt id="calamari.data.SS_updater.SS_Updater.update">
-<code class="sig-name descname">update</code><span class="sig-paren">(</span><em class="sig-param">Ticker=None</em>, <em class="sig-param">SSID=None</em>, <em class="sig-param">refresh=False</em><span class="sig-paren">)</span><a class="headerlink" href="#calamari.data.SS_updater.SS_Updater.update" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">update</code><span class="sig-paren">(</span><em class="sig-param">Tickers=None</em>, <em class="sig-param">SSID=None</em>, <em class="sig-param">refresh=False</em><span class="sig-paren">)</span><a class="headerlink" href="#calamari.data.SS_updater.SS_Updater.update" title="Permalink to this definition">¶</a></dt>
 <dd><p>Updates the spreadsheet.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>Ticker</strong> (<a class="reference internal" href="#calamari.data.info.Updater" title="calamari.data.info.Updater"><em>Updater</em></a>) – The <code class="xref py py-class docutils literal notranslate"><span class="pre">Updater</span></code> used. Defaults to self.Ticker.</p></li>
+<li><p><strong>Tickers</strong> (<a class="reference internal" href="#calamari.data.info.Updater" title="calamari.data.info.Updater"><em>Updater</em></a>) – The <code class="xref py py-class docutils literal notranslate"><span class="pre">Updater</span></code> used. Defaults to self.Tickers.</p></li>
 <li><p><strong>SSID</strong> (<em>string</em>) – ID of the spreadsheet to update. Defaults to self.SSID.</p></li>
-<li><p><strong>refresh</strong> (<em>bool</em>) – Refresh Ticker before use?</p></li>
+<li><p><strong>refresh</strong> (<em>bool</em>) – Refresh Tickers before use?</p></li>
 </ul>
 </dd>
 </dl>
@@ -267,8 +284,7 @@ asset_pairs_info (dict): Dict of asset pairs and information.</p>
 <dl class="class">
 <dt id="calamari.data.info.Updater">
 <em class="property">class </em><code class="sig-prename descclassname">calamari.data.info.</code><code class="sig-name descname">Updater</code><span class="sig-paren">(</span><em class="sig-param">special_pair_names=['XETHXXBT', 'XXMRXXBT', 'XLTCXXBT', 'XXBTZEUR', 'XXBTZUSD', 'XXBTZCAD', 'XXBTZJPY', 'XXBTZGBP', 'XETHZGBP', 'XETHZJPY', 'XETHZCAD', 'XETHZEUR', 'XETHZUSD', 'XXMRZUSD', 'XXMRZEUR', 'XLTCZUSD', 'XLTCZEUR']</em><span class="sig-paren">)</span><a class="headerlink" href="#calamari.data.info.Updater" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
-<p>Updater objects hold information on multiple Pairs. We can update this info using the refresh() method.
+<dd><p>Updater objects hold information on multiple Pairs. We can update this info using the refresh() method.
 They also holds a list of ‘special_pair_names’. We can format the data for these Pairs to fit on a spreadsheet.</p>
 <dl class="attribute">
 <dt id="calamari.data.info.Updater.info">
@@ -334,9 +350,6 @@ Also updates the special lists with the same data if special is set.</p>
 </dd></dl>
 
 </div>
-<div class="section" id="module-calamari.data">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-calamari.data" title="Permalink to this headline">¶</a></h2>
-</div>
 </div>
 
 
@@ -350,7 +363,7 @@ Also updates the special lists with the same data if special is set.</p>
         <a href="calamari.network.html" class="btn btn-neutral float-right" title="calamari.network package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="../index.html" class="btn btn-neutral float-left" title="Welcome to calamari’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+        <a href="calamari.html" class="btn btn-neutral float-left" title="calamari package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   

@@ -1,9 +1,6 @@
 from .pair import *
 from ..trade.order import *
-from ..data.assets import *
 from ..data.fees import *
-from ..data.info import *
-import networkx as nx
 
 class Loop():
     def __init__(self, d_graph, assets, Tickers):
@@ -16,20 +13,28 @@ class Loop():
 
     def find_pair(self, d_edge, d_graph=None):
         '''
-        Given a directed edge, return a vaild Pair name if one exists, 
+        Given a directed edge, return a vaild matching Pair name if one exists, 
         indicating the direction of the Pair relatative to the directed edge
         '''
         if d_graph == None:
             d_graph = self.graph
         start, dest = d_edge
         if (start, dest) in d_graph.edges:
-            return start + dest, 0
+            for name in all_pairs:
+                if all_pairs[name].edge == (start, dest):
+                    return name, 0
         elif (dest, start) in d_graph.edges:
-            return dest + start, 1
+            for name in all_pairs:
+                if all_pairs[name].edge == (dest, start):
+                    return name, 1
         else:
             raise ValueError('Could not find a pair which trades these assets.')
 
     def calculate(self, reverse=False, refresh=True, volume=100, silent=False):
+        '''
+        Calculate the volume change after each transaction in the loop, given we started with
+        `volume` amount of bitcoin and at the current exchange rates. 
+        '''
         market = [volume]
         book = [volume]
 
@@ -39,6 +44,8 @@ class Loop():
         if refresh:
             self.Tickers.refresh(pairs=self.pair_names)
         if not silent:
+            print('\nAnalysing Loop:', self.nodes,
+                 '<REVERSE>' if reverse else '')
             print('\nCalculating the volume changes for the following trades: ')
             for trade in trades[:-1]:
                 print(trade, '---->')
@@ -51,11 +58,11 @@ class Loop():
             marketp = float(self.Tickers.info[pair]['c'][0])
 
             if trade[1] == 0:
-                book.append(book[-1] * bid * self.fee)
-                market.append(market[-1] * marketp * self.fee)
+                book.append(book[-1] * bid * fee)
+                market.append(market[-1] * marketp * fee)
             else:
-                book.append(book[-1] * 1/ask * self.fee)
-                market.append(market[-1] * 1/marketp * self.fee)
+                book.append(book[-1] * 1/ask * fee)
+                market.append(market[-1] * 1/marketp * fee)
         if not silent:
             print('Volume changes after each transaction using...')
             print(' * Book Prices: ', book)
@@ -64,6 +71,9 @@ class Loop():
         return (book, market)
 
     def execute(self, start_volume, reverse=False, refresh=False, market=False, silent=True):
+        '''
+        Execute the trades in the Loop, with a given `start_volume` of bitcoin.
+        '''
         volumes = self.calculate(reverse, 
                                  refresh,
                                  start_volume,
@@ -94,6 +104,9 @@ class Loop():
             i += 1
 
 if __name__ == '__main__':
+    import networkx as nx
+    from ..data.info import *
+    
     Tickers = Updater()
 
     graph = nx.Graph()

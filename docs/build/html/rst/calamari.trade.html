@@ -81,13 +81,27 @@
             
               <p class="caption"><span class="caption-text">Contents:</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="calamari.data.html">data</a></li>
-<li class="toctree-l1"><a class="reference internal" href="calamari.network.html">network</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">trade</a><ul>
+<li class="toctree-l1 current"><a class="reference internal" href="calamari.html">calamari package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="calamari.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="calamari.data.html">calamari.data package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="calamari.network.html">calamari.network package</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">calamari.trade package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-calamari.trade.order">calamari.trade.order module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-calamari.trade.trader">calamari.trade.trader module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="calamari.html#module-contents">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="calamari.network.html">calamari.network package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="calamari.data.html">calamari.data package</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">calamari.trade package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-calamari.trade.order">calamari.trade.order module</a></li>
 <li class="toctree-l2"><a class="reference internal" href="#module-calamari.trade.trader">calamari.trade.trader module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#module-calamari.trade">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -135,6 +149,8 @@
     
       <li><a href="../index.html">Docs</a> &raquo;</li>
         
+          <li><a href="calamari.html">calamari package</a> &raquo;</li>
+        
       <li>calamari.trade package</li>
     
     
@@ -161,17 +177,16 @@
 </div>
 <div class="section" id="module-calamari.trade.order">
 <span id="calamari-trade-order-module"></span><h2>calamari.trade.order module<a class="headerlink" href="#module-calamari.trade.order" title="Permalink to this headline">¶</a></h2>
-<dl class="function">
-<dt id="calamari.trade.order.add_order">
-<code class="sig-prename descclassname">calamari.trade.order.</code><code class="sig-name descname">add_order</code><span class="sig-paren">(</span><em class="sig-param">volume</em>, <em class="sig-param">pair_name</em>, <em class="sig-param">price</em>, <em class="sig-param">direction</em><span class="sig-paren">)</span><a class="headerlink" href="#calamari.trade.order.add_order" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
+<p>Handles placing the orders.</p>
 </div>
 <div class="section" id="module-calamari.trade.trader">
 <span id="calamari-trade-trader-module"></span><h2>calamari.trade.trader module<a class="headerlink" href="#module-calamari.trade.trader" title="Permalink to this headline">¶</a></h2>
-</div>
-<div class="section" id="module-calamari.trade">
-<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-calamari.trade" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="calamari.trade.trader.trader">
+<code class="sig-prename descclassname">calamari.trade.trader.</code><code class="sig-name descname">trader</code><span class="sig-paren">(</span><em class="sig-param">loop</em><span class="sig-paren">)</span><a class="headerlink" href="#calamari.trade.trader.trader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Find profitable Loops and exploit them.</p>
+</dd></dl>
+
 </div>
 </div>
 

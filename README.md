@@ -2,27 +2,30 @@ These are the files for the command-line script that finds arbitrage opportunite
 
 -------
 
-`ticker_info.py` contains the variables `ticker_info`, `ticker_ab` and `ticker_m`.
-It also contains the method `ticker_refresh()`.
-
-- `ticker_info` is a dictionary of  *ticker*: *ticker-infomation*
-- `ticker_ab` is a list of alternating the ask-bid prices
-- `ticker_m` is a list of alternating market prices and blank spaces.
-
-These last two will become rows 44 and 45 in the spreadsheet; hence the formatting.
-
-- `ticker_refresh()` is used to update these lists.
-
-`ticker_refresh()` uses the krakenex module to get data directly from the Kraken website, and then puts that data in ticker_info, ticker_ab, and ticker_m
+`trader` is the actual trading bot - it looks at loops, and finds trading opportunites within them.
 
 -------
 
-`SS_updater.py`, when run at the command-line, updates the spreadsheet ask/bid and market prices.
+`info` contains a class which can be used to build an 'Updater' object.
+This object is then used to hold informfation about the different trading pairs. 
+You can call `refresh()` on an Updater object to update the ticker information it holds.
 
 -------
 
-`credentials.json` is the reqirued data for using the Google Sheets API - it tells google who the developer is (as opposed the user) so that you/they can track the use of the API. The user still needs to log in and give the developer access to their google account data. 
+`SS_updater`, Updates the spreadsheet with recent ask/bid and market prices.
 
 -------
 
-`token.pickle` is where the authentication token is saved; the auth token is used to build the spreadsheet api when the user is using the app and tells the api who the user is, who the developer is, and what permissions has the user given the developer.
+`fees` contains a function used to update the fee.
+
+-------
+
+`assets` defines functions to get a list assets (currencies) and the trading pairs.
+
+-------
+
+`pair` defines a class `Pair`. An instance of `Pair` will contain information about a specific trading pair - it is used mostly in creating edges for the network.
+
+-------
+
+`loop` contains the Loop class definitions. Loop objects know what assests are in the loop, how to trade in a circle around the loop, and the exchange rates between all the relevant pairs

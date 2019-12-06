@@ -15,5 +15,5 @@ def get_fee():
     else:
         fee = 1 - fee / 100
         return fee
-get_fee()
 
+fee = 0.9974

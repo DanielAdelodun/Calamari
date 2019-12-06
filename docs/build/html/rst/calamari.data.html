@@ -1,0 +1,404 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>calamari.data package &mdash; calamari 0.1.0 documentation</title>
+  
+
+  
+  
+  
+  
+
+  
+  <script type="text/javascript" src="../_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../_static/jquery.js"></script>
+        <script type="text/javascript" src="../_static/underscore.js"></script>
+        <script type="text/javascript" src="../_static/doctools.js"></script>
+        <script type="text/javascript" src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="calamari.network package" href="calamari.network.html" />
+    <link rel="prev" title="calamari package" href="calamari.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home"> calamari
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="calamari.html">calamari package</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="calamari.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">calamari.data package</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-calamari.data.SS_updater">calamari.data.SS_updater module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-calamari.data.assets">calamari.data.assets module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-calamari.data.fees">calamari.data.fees module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#module-calamari.data.info">calamari.data.info module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="calamari.network.html">calamari.network package</a></li>
+<li class="toctree-l3"><a class="reference internal" href="calamari.trade.html">calamari.trade package</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="calamari.html#module-contents">Module contents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="calamari.network.html">calamari.network package</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">calamari.data package</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#submodules">Submodules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-calamari.data.SS_updater">calamari.data.SS_updater module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-calamari.data.assets">calamari.data.assets module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-calamari.data.fees">calamari.data.fees module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#module-calamari.data.info">calamari.data.info module</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="calamari.trade.html">calamari.trade package</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">calamari</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html">Docs</a> &raquo;</li>
+        
+          <li><a href="calamari.html">calamari package</a> &raquo;</li>
+        
+      <li>calamari.data package</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/rst/calamari.data.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="calamari-data-package">
+<h1>calamari.data package<a class="headerlink" href="#calamari-data-package" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="submodules">
+<h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="module-calamari.data.SS_updater">
+<span id="calamari-data-ss-updater-module"></span><h2>calamari.data.SS_updater module<a class="headerlink" href="#module-calamari.data.SS_updater" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="calamari.data.SS_updater.SS_Updater">
+<em class="property">class </em><code class="sig-prename descclassname">calamari.data.SS_updater.</code><code class="sig-name descname">SS_Updater</code><span class="sig-paren">(</span><em class="sig-param">special_pair_names=['XETHXXBT', 'XXMRXXBT', 'XLTCXXBT', 'XXBTZEUR', 'XXBTZUSD', 'XXBTZCAD', 'XXBTZJPY', 'XXBTZGBP', 'XETHZGBP', 'XETHZJPY', 'XETHZCAD', 'XETHZEUR', 'XETHZUSD', 'XXMRZUSD', 'XXMRZEUR', 'XLTCZUSD', 'XLTCZEUR'], SSID='1rrwAsg9Ky1oCUlSwL2kambtrE3fJzTEsS56hbqOGJuU'</em><span class="sig-paren">)</span><a class="headerlink" href="#calamari.data.SS_updater.SS_Updater" title="Permalink to this definition">¶</a></dt>
+<dd><p>Updates a particular Google Sheet.</p>
+<dl class="attribute">
+<dt id="calamari.data.SS_updater.SS_Updater.special_pair_names">
+<code class="sig-name descname">special_pair_names</code><a class="headerlink" href="#calamari.data.SS_updater.SS_Updater.special_pair_names" title="Permalink to this definition">¶</a></dt>
+<dd><p>A list of the Pairs to include in the spreadsheet.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="calamari.data.SS_updater.SS_Updater.SSID">
+<code class="sig-name descname">SSID</code><a class="headerlink" href="#calamari.data.SS_updater.SS_Updater.SSID" title="Permalink to this definition">¶</a></dt>
+<dd><p>The ID of the spreadsheet we would like to update.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="calamari.data.SS_updater.SS_Updater.Tickers">
+<code class="sig-name descname">Tickers</code><a class="headerlink" href="#calamari.data.SS_updater.SS_Updater.Tickers" title="Permalink to this definition">¶</a></dt>
+<dd><p>Default <code class="xref py py-class docutils literal notranslate"><span class="pre">Updater</span></code> used for getting Pair data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p><a class="reference internal" href="#calamari.data.info.Updater" title="calamari.data.info.Updater">Updater</a></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="calamari.data.SS_updater.SS_Updater.update">
+<code class="sig-name descname">update</code><span class="sig-paren">(</span><em class="sig-param">Tickers=None</em>, <em class="sig-param">SSID=None</em>, <em class="sig-param">refresh=False</em><span class="sig-paren">)</span><a class="headerlink" href="#calamari.data.SS_updater.SS_Updater.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>Updates the spreadsheet.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>Tickers</strong> (<a class="reference internal" href="#calamari.data.info.Updater" title="calamari.data.info.Updater"><em>Updater</em></a>) – The <code class="xref py py-class docutils literal notranslate"><span class="pre">Updater</span></code> used. Defaults to self.Tickers.</p></li>
+<li><p><strong>SSID</strong> (<em>string</em>) – ID of the spreadsheet to update. Defaults to self.SSID.</p></li>
+<li><p><strong>refresh</strong> (<em>bool</em>) – Refresh Tickers before use?</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-calamari.data.assets">
+<span id="calamari-data-assets-module"></span><h2>calamari.data.assets module<a class="headerlink" href="#module-calamari.data.assets" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="calamari.data.assets.filterDuplicates">
+<code class="sig-prename descclassname">calamari.data.assets.</code><code class="sig-name descname">filterDuplicates</code><span class="sig-paren">(</span><em class="sig-param">asset_pair</em><span class="sig-paren">)</span><a class="headerlink" href="#calamari.data.assets.filterDuplicates" title="Permalink to this definition">¶</a></dt>
+<dd><p>Filter function used to remove duplicate entries in the <code class="xref py py-data docutils literal notranslate"><span class="pre">asset_pairs</span></code> list</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="calamari.data.assets.get_asset_pairs">
+<code class="sig-prename descclassname">calamari.data.assets.</code><code class="sig-name descname">get_asset_pairs</code><span class="sig-paren">(</span><em class="sig-param">info=True</em><span class="sig-paren">)</span><a class="headerlink" href="#calamari.data.assets.get_asset_pairs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns either a list of all <code class="xref py py-data docutils literal notranslate"><span class="pre">asset_pairs</span></code>, or a dictionary of <code class="xref py py-data docutils literal notranslate"><span class="pre">all_pairs_info</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>info</strong> (<em>bool</em>) – With or without info.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>List of asset pairs. or
+asset_pairs_info (dict): Dict of asset pairs and information.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>asset_pairs (list)</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="function">
+<dt id="calamari.data.assets.get_assets">
+<code class="sig-prename descclassname">calamari.data.assets.</code><code class="sig-name descname">get_assets</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#calamari.data.assets.get_assets" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of all availible <code class="xref py py-data docutils literal notranslate"><span class="pre">assets</span></code></p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-calamari.data.fees">
+<span id="calamari-data-fees-module"></span><h2>calamari.data.fees module<a class="headerlink" href="#module-calamari.data.fees" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="calamari.data.fees.get_fee">
+<code class="sig-prename descclassname">calamari.data.fees.</code><code class="sig-name descname">get_fee</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#calamari.data.fees.get_fee" title="Permalink to this definition">¶</a></dt>
+<dd><p>Allows you to update fee. Returns the fee.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="module-calamari.data.info">
+<span id="calamari-data-info-module"></span><h2>calamari.data.info module<a class="headerlink" href="#module-calamari.data.info" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="calamari.data.info.Updater">
+<em class="property">class </em><code class="sig-prename descclassname">calamari.data.info.</code><code class="sig-name descname">Updater</code><span class="sig-paren">(</span><em class="sig-param">special_pair_names=['XETHXXBT', 'XXMRXXBT', 'XLTCXXBT', 'XXBTZEUR', 'XXBTZUSD', 'XXBTZCAD', 'XXBTZJPY', 'XXBTZGBP', 'XETHZGBP', 'XETHZJPY', 'XETHZCAD', 'XETHZEUR', 'XETHZUSD', 'XXMRZUSD', 'XXMRZEUR', 'XLTCZUSD', 'XLTCZEUR']</em><span class="sig-paren">)</span><a class="headerlink" href="#calamari.data.info.Updater" title="Permalink to this definition">¶</a></dt>
+<dd><p>Updater objects hold information on multiple Pairs. We can update this info using the refresh() method.
+They also holds a list of ‘special_pair_names’. We can format the data for these Pairs to fit on a spreadsheet.</p>
+<dl class="attribute">
+<dt id="calamari.data.info.Updater.info">
+<code class="sig-name descname">info</code><a class="headerlink" href="#calamari.data.info.Updater.info" title="Permalink to this definition">¶</a></dt>
+<dd><p>A dictionary contining the most up-to-date information on each Pair.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="calamari.data.info.Updater.special_pair_names">
+<code class="sig-name descname">special_pair_names</code><a class="headerlink" href="#calamari.data.info.Updater.special_pair_names" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="calamari.data.info.Updater.ask_bid">
+<code class="sig-name descname">ask_bid</code><a class="headerlink" href="#calamari.data.info.Updater.ask_bid" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alternating list of the ask/bid prices for the Pairs in <a class="reference internal" href="#calamari.data.info.Updater.special_pair_names" title="calamari.data.info.Updater.special_pair_names"><code class="xref py py-attr docutils literal notranslate"><span class="pre">special_pair_names</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="calamari.data.info.Updater.market">
+<code class="sig-name descname">market</code><a class="headerlink" href="#calamari.data.info.Updater.market" title="Permalink to this definition">¶</a></dt>
+<dd><p>Alternating list of market prices for <a class="reference internal" href="#calamari.data.info.Updater.special_pair_names" title="calamari.data.info.Updater.special_pair_names"><code class="xref py py-attr docutils literal notranslate"><span class="pre">special_pair_names</span></code></a> and blank spaces.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type</dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="calamari.data.info.Updater.pairs">
+<code class="sig-name descname">pairs</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#calamari.data.info.Updater.pairs" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a list of the Pairs the Updater has data on</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="calamari.data.info.Updater.refresh">
+<code class="sig-name descname">refresh</code><span class="sig-paren">(</span><em class="sig-param">special=True</em>, <em class="sig-param">pairs=None</em><span class="sig-paren">)</span><a class="headerlink" href="#calamari.data.info.Updater.refresh" title="Permalink to this definition">¶</a></dt>
+<dd><p>Updates the info dictionary with fresh data from the Kraken website.
+Also updates the special lists with the same data if special is set.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>pairs</strong> (<em>list</em>) – List of Pair names to be refreshed.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="calamari.network.html" class="btn btn-neutral float-right" title="calamari.network package" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="calamari.html" class="btn btn-neutral float-left" title="calamari package" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Daniel Ajibola Adelodun
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

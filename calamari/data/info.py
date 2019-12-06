@@ -3,7 +3,7 @@ import krakenex
 kraken = krakenex.API()
 
 # We could call the 'special_pair_names' spreadsheet_pair_names instead.
-# They are the Pairs and Assets which have a place on the google sheet.
+# They are the Pairs (and Assets) which have a place on the google sheet.
 special_pair_names = ['XETHXXBT','XXMRXXBT','XLTCXXBT','XXBTZEUR',
                  'XXBTZUSD','XXBTZCAD','XXBTZJPY','XXBTZGBP',
                  'XETHZGBP','XETHZJPY','XETHZCAD','XETHZEUR',
@@ -32,7 +32,7 @@ class Updater():
     def refresh(self, special=True, pairs=None):
         """
         Updates the info dictionary with fresh data from the Kraken website.
-        Also updates the special lists with the same data if :param:`special` is set.
+        Also updates the special lists with the same data if special is set.
 
         Args:
             pairs (list): List of Pair names to be refreshed.
@@ -42,8 +42,16 @@ class Updater():
             pairs = self.special_pair_names
 
         for pair in pairs: 
-            returned = kraken.query_public('Ticker', {'pair':pair}) # Get ticker information for each pair in the list 'pairs'
-            self.info[pair] = returned['result'][pair] # ...And put that information in a dictionary
+            try:
+                returned = kraken.query_public('Ticker', {'pair':pair}) # Get ticker information for each pair in the list 'pairs'
+            except:
+                raise
+            try:
+                self.info[pair] = returned['result'][pair] # ...And put that information in a dictionary
+            except:
+                print('Refresh failed for:', pair)
+                print(returned['error'])
+                raise
 
         # If special is set, update special lists (alternating ask/bid prices, and market-prices/blank-space).
         if special == True:

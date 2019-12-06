@@ -12,7 +12,7 @@ You can call `refresh()` on an Updater object to update the ticker information i
 
 -------
 
-`SS_updater`, when run at the command-line, repeatedly updates the spreadsheet with recent ask/bid and market prices.
+`SS_updater`, Updates the spreadsheet with recent ask/bid and market prices.
 
 -------
 
@@ -28,4 +28,4 @@ You can call `refresh()` on an Updater object to update the ticker information i
 
 -------
 
-`loop` contains the Loop class definitions. Loop objects know what assests are in the loop, how to trade in a circle around the loop, and the exchange rates between all the relevant pairs.
+`loop` contains the Loop class definitions. Loop objects know what assests are in the loop, how to trade in a circle around the loop, and the exchange rates between all the relevant pairs
